@@ -1,81 +1,232 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Viet69 Style - Trang Video</title>
+  <meta charset="UTF-8">
+  <title>Dự đoán Tài/Xỉu</title>
   <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      background: #0b0c10;
-      color: #f0f0f0;
-      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-image: url('https://files.catbox.moe/axz7l4.jpg');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+    }
+    .container {
+      max-width: 600px;
+      margin: 30px auto;
+      background: rgba(255,255,255,0.95);
       padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.3);
     }
-    header {
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+      background-image: url('https://files.catbox.moe/axz7l4.jpg');
+      background-size: cover;
+    }
+    .tele-name {
+      font-size: 20px;
+      font-weight: bold;
+    }
+    .tabs {
+      display: flex;
+      margin-top: 10px;
+    }
+    .tab {
+      flex: 1;
       text-align: center;
-      margin-bottom: 30px;
-    }
-    header h1 {
-      color: #00ffc8;
-      text-shadow: 0 0 10px #00ffc8;
-      font-size: 28px;
-    }
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 20px;
-    }
-    .video-card {
-      background: #1a1a1a;
-      border-radius: 10px;
-      overflow: hidden;
-      box-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
-      transition: transform 0.2s ease;
-    }
-    .video-card:hover {
-      transform: scale(1.03);
-    }
-    .video-card img {
-      width: 100%;
-      display: block;
-    }
-    .video-card h3 {
       padding: 10px;
-      font-size: 16px;
-      color: #00ffc8;
+      cursor: pointer;
+      background: #f0f0f0;
+      border: 1px solid #ccc;
     }
-    footer {
+    .tab.active {
+      background: #007bff;
+      color: white;
+      font-weight: bold;
+    }
+    .input-area {
+      margin-top: 15px;
       text-align: center;
-      margin-top: 40px;
-      color: #777;
+    }
+    .slots {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .slot {
+      width: 40px;
+      height: 40px;
+      font-size: 18px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      line-height: 40px;
+      background: #eee;
+    }
+    .result-btns button {
+      padding: 10px 20px;
+      font-size: 16px;
+      margin: 0 10px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+    }
+    .tai { background: #d4f4dd; color: #009933; }
+    .xiu { background: #f9d6d5; color: #cc0000; }
+
+    .predict-btn {
+      margin-top: 20px;
+      width: 100%;
+      padding: 12px;
+      background: #007bff;
+      color: white;
+      border: none;
+      font-size: 18px;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .stats {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 16px;
+    }
+    .highlight {
+      font-weight: bold;
+      font-size: 20px;
+      margin-top: 15px;
+    }
+    .bottom-options {
+      margin-top: 20px;
+      text-align: center;
+    }
+    .delete-btn {
+      background: #999;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .sequence-input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
     }
   </style>
 </head>
 <body>
-  <header>
-    <h1>🎥 Bộ sưu tập Video</h1>
-    <p>Giao diện cảm hứng từ viet69.fi</p>
-  </header>
+  <div class="container">
+    <div class="header">
+      <div class="avatar"></div>
+      <div class="tele-name">🎲 @Mtuan0802205 🎲</div>
+    </div>
 
-  <div class="video-grid">
-    <div class="video-card">
-      <img src="https://placehold.co/300x180" alt="Video 1">
-      <h3>Tiêu đề Video 1</h3>
+    <div class="tabs">
+      <div class="tab active" onclick="showTab('buttons')">Nhập bằng nút</div>
+      <div class="tab" onclick="showTab('text')">Nhập liền chuỗi</div>
     </div>
-    <div class="video-card">
-      <img src="https://placehold.co/300x180" alt="Video 2">
-      <h3>Tiêu đề Video 2</h3>
+
+    <div class="input-area" id="buttons-tab">
+      <div class="slots" id="slotBox">
+        <div class="slot">?</div>
+        <div class="slot">?</div>
+        <div class="slot">?</div>
+        <div class="slot">?</div>
+        <div class="slot">?</div>
+        <div class="slot">?</div>
+      </div>
+      <div class="result-btns">
+        <button class="tai" onclick="addResult('T')">TÀI</button>
+        <button class="xiu" onclick="addResult('X')">XỈU</button>
+      </div>
     </div>
-    <div class="video-card">
-      <img src="https://placehold.co/300x180" alt="Video 3">
-      <h3>Tiêu đề Video 3</h3>
+
+    <div class="input-area" id="text-tab" style="display:none;">
+      <input class="sequence-input" id="sequenceInput" maxlength="6" placeholder="Nhập 6 ký tự: T hoặc X (VD: TXTTXT)">
+    </div>
+
+    <button class="predict-btn" onclick="predict()">DỰ ĐOÁN KẾT QUẢ</button>
+
+    <div class="stats" id="stats"></div>
+    <div class="stats" id="prediction"></div>
+
+    <div class="bottom-options">
+      <button class="delete-btn" onclick="resetData()">Xóa chuỗi</button>
     </div>
   </div>
 
-  <footer>
-    © 2025 | Giao diện xây dựng riêng hợp pháp | Liên hệ: @hungisme10
-  </footer>
+  <script>
+    let resultList = [];
+
+    function showTab(type) {
+      document.getElementById("buttons-tab").style.display = type === 'buttons' ? "block" : "none";
+      document.getElementById("text-tab").style.display = type === 'text' ? "block" : "none";
+      document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+      document.querySelectorAll(".tab")[type === 'buttons' ? 0 : 1].classList.add("active");
+    }
+
+    function addResult(val) {
+      if (resultList.length >= 6) return;
+      resultList.push(val);
+      updateSlots();
+    }
+
+    function updateSlots() {
+      const slots = document.querySelectorAll(".slot");
+      for (let i = 0; i < 6; i++) {
+        slots[i].textContent = resultList[i] || '?';
+      }
+    }
+
+    function predict() {
+      let data = [];
+
+      if (document.getElementById("text-tab").style.display === 'block') {
+        const text = document.getElementById("sequenceInput").value.toUpperCase().replace(/[^TX]/g, '');
+        if (text.length !== 6) return alert("Vui lòng nhập đủ 6 ký tự.");
+        data = [...text];
+      } else {
+        if (resultList.length !== 6) return alert("Bạn phải chọn đủ 6 kết quả.");
+        data = [...resultList];
+      }
+
+      let T = data.filter(x => x === 'T').length;
+      let X = data.filter(x => x === 'X').length;
+      let total = T + X;
+      let percentT = ((T / total) * 100).toFixed(2);
+      let percentX = ((X / total) * 100).toFixed(2);
+      let next = T > X ? "XỈU" : "TÀI";
+      let conf = Math.max(percentT, percentX);
+
+      document.getElementById("stats").innerHTML = `
+        Tài: ${T} (${percentT}%) | Xỉu: ${X} (${percentX}%) | Tổng: ${total}
+      `;
+      document.getElementById("prediction").innerHTML = `
+        ✅ Dự đoán kết quả tiếp theo: <b>${next}</b> (${conf}%)
+      `;
+    }
+
+    function resetData() {
+      resultList = [];
+      updateSlots();
+      document.getElementById("sequenceInput").value = '';
+      document.getElementById("stats").innerHTML = '';
+      document.getElementById("prediction").innerHTML = '';
+    }
+  </script>
 </body>
 </html>
