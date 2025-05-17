@@ -1,0 +1,81 @@
+
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Viet69 Style - Trang Video</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0b0c10;
+      color: #f0f0f0;
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+    }
+    header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    header h1 {
+      color: #00ffc8;
+      text-shadow: 0 0 10px #00ffc8;
+      font-size: 28px;
+    }
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+    }
+    .video-card {
+      background: #1a1a1a;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 0 10px rgba(0, 255, 200, 0.2);
+      transition: transform 0.2s ease;
+    }
+    .video-card:hover {
+      transform: scale(1.03);
+    }
+    .video-card img {
+      width: 100%;
+      display: block;
+    }
+    .video-card h3 {
+      padding: 10px;
+      font-size: 16px;
+      color: #00ffc8;
+    }
+    footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #777;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🎥 Bộ sưu tập Video</h1>
+    <p>Giao diện cảm hứng từ viet69.fi</p>
+  </header>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <img src="https://placehold.co/300x180" alt="Video 1">
+      <h3>Tiêu đề Video 1</h3>
+    </div>
+    <div class="video-card">
+      <img src="https://placehold.co/300x180" alt="Video 2">
+      <h3>Tiêu đề Video 2</h3>
+    </div>
+    <div class="video-card">
+      <img src="https://placehold.co/300x180" alt="Video 3">
+      <h3>Tiêu đề Video 3</h3>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 | Giao diện xây dựng riêng hợp pháp | Liên hệ: @hungisme10
+  </footer>
+</body>
+</html>
